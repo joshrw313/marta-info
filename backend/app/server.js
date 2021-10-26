@@ -49,6 +49,15 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 8080;
 
+function invalidForm (message, redirect) {
+	return `
+	<div>
+	<h3>${message}</h3>
+	<a href="/${redirect}">return to ${redirect}</a>
+	</div>
+	`
+};
+
 app.get('/api/bus/all', async (req,res) => {
 	const options = {
 		hostname: 'developer.itsmarta.com',
@@ -81,7 +90,6 @@ app.get('/api/train/all', async (req,res) => {
 });
 
 app.post('/api/auth/signup', verifySignUp, (req,res) => {
-	console.log(req);
 	User.create({
 		username: req.body["username"],
 		email: req.body.email,
@@ -91,9 +99,12 @@ app.post('/api/auth/signup', verifySignUp, (req,res) => {
 		res.status(200).redirect('/signin');
 	})
 	.catch(err => {
-		res.status(500).send({message: err.message});
+		let message = err.message;
+		let redirect = "signup";
+		res.status(500).send(invalidForm(message, redirect));
 	});
 });
+
 
 app.post('/api/auth/signin', (req,res) => {
 	User.findOne({
@@ -102,7 +113,9 @@ app.post('/api/auth/signin', (req,res) => {
 		}
 	}).then(async (user) => {
 		if (!user) {
-			res.send({"username": null, "message": "Invalid Username"});
+			const message = "invalid username";
+			const redirect = "signin"
+			res.send(invalidForm(message,redirect));
 		}
 
 		const passwordIsValid = bcrypt.compareSync(
@@ -110,7 +123,9 @@ app.post('/api/auth/signin', (req,res) => {
 			user.password
 		);
 		if (!passwordIsValid) {
-			res.send({"username": null, "message" : "Invalid Password"});
+			const message = "invalid password";
+			const redirect = "signin"
+			res.send(invalidForm(message,redirect));
 		}
 
 		const session = req.session;
