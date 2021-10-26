@@ -7,7 +7,7 @@ const Signup = (props) => {
 		<div className="container-fluid d-flex p-2 align-items-center" >
 			<div className="container-sm">
 				<h1>Create an Account</h1>
-				<form action="dcproject0821:8080/api/auth/signup" method="POST">
+				<form action="http://dcproject0821:8080/api/auth/signup" method="POST">
 				<div className="md-3">
 					<label htmlFor="username" className="form-label">Username</label>
 					<input type="text" className="form-control" id="username" name="username" />
