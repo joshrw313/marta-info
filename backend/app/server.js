@@ -35,6 +35,10 @@ app.use(sessions({
 
 myStore.sync();
 
+const path= require('path');
+
+app.use(express.static(path.join(__dirname, 'build')));
+
 app.use(cookieParser());
 
 app.use(cors(corsOptions));
@@ -77,14 +81,14 @@ app.get('/api/train/all', async (req,res) => {
 });
 
 app.post('/api/auth/signup', verifySignUp, (req,res) => {
-	console.log(req.body);
+	console.log(req);
 	User.create({
 		username: req.body["username"],
 		email: req.body.email,
 		password: bcrypt.hashSync(req.body.password, 8)
 	}).then(async (user) => {
-		//res.send({"username": `${user.username}`, "message": "user registered"});
-		res.status(200).redirect('http://localhost:3000/signin');
+		//res.status(200).send({"username": `${user.username}`, "message": "user registered"});
+		res.status(200).redirect('/signin');
 	})
 	.catch(err => {
 		res.status(500).send({message: err.message});
@@ -114,13 +118,17 @@ app.post('/api/auth/signin', (req,res) => {
 		console.log(req.session);
 		res.cookie('username', `${req.body.username}`);
 		//res.send({"username": `${user.username}`, "message": 'Login Sucessful'})
-		res.status(200).redirect('http://localhost:3000/home');
+		res.status(200).redirect('/home');
 	})
 });
 
 app.get('/api/auth/logout', (req,res) => {
 	req.session.destroy();
-	res.status(200).redirect('http://localhost:3000/');
+	res.status(200).redirect('/');
+});
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
 

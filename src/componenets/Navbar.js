@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="divider-horizontal"></div>
         <div className="divider-horizontal"></div>
         <div className="divider-horizontal"></div>
-        <form action="http://localhost:8080/api/auth/logout">
+        <form action="/api/auth/logout">
         <button className="btn-light" style={{backgroundColor: "#393433", color: "white"}} type="submit">logout</button>
         </form>
         <div className="divider-horizontal"></div>
