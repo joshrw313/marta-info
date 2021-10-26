@@ -80,7 +80,7 @@ export const getBusAll = () => {
 	return dispatch => {
 		dispatch(actionGetAllBusStart());
 		console.log('fetch')
-	fetch(`http://localhost:8080/api/bus/all`)
+	fetch(`/api/bus/all`)
 		.then(res => res.json())
 		.then(res => dispatch(actionGetAllBusSuccess(res)))
 		.catch(err => dispatch(actionGetAllBusFailure(err)))
@@ -93,7 +93,7 @@ export const getBusByRoute = (route) => {
 	return dispatch => {
 		dispatch(actionGetBusByRouteStart());
 
-	fetch(`http://localhost:8080/api/bus/${route}`)
+	fetch(`/api/bus/${route}`)
 		.then(res => res.json())
 		.then(res => dispatch(actionGetBusByRouteSuccess(res)))
 		.catch(err => dispatch(actionGetBusByRouteFailure(err)))
@@ -105,7 +105,7 @@ export const getRail = () => {
 	return dispatch => {
 		dispatch(actionGetRailStart());
 
-	fetch(`http://localhost:8080/api/train/all`)
+	fetch(`/api/train/all`)
 		.then(res => res.json())
 		.then(res => dispatch(actionGetRailSuccess(res)))
 		.catch(err => dispatch(actionGetRailFailure(err.message)))
