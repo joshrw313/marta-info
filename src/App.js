@@ -12,6 +12,7 @@ import Navbar from './componenets/Navbar';
 import Home from './componenets/Home';
 import Bus from './componenets/Bus';
 import Rail from './componenets/Rail';
+import NotFound from './componenets/NotFound';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import RailStation from './componenets/railStationContainer';
@@ -56,6 +57,7 @@ function App() {
         <Navbar />
         <BusRoute/>
       </Route>
+      <Route component={NotFound} /> 
       </Switch>
     </Router>
     </Provider>
