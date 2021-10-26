@@ -2,7 +2,7 @@ const Signin = () => {
 	return (  
 		<div className="container-fluid d-flex p-2 align-items-center">
 			<div className="container-sm">
-				<form action="http://dcproject0821.xyz:8080/api/auth/signin" method="post">
+				<form action="/api/auth/signin" method="post">
 				<div className="md-3">
 					<label for="username" className="form-label">Username</label>
 					<input type="username" class="form-control" id="username" name="username" />
