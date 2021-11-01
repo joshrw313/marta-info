@@ -14,10 +14,12 @@ const BusDetails = (props) => {
 		return () => clearTimeout(timer);
 	});
 
+	
+	let thisBus = [];
 
 	const findThisBus = () => {
 		const allBusses = Object.keys(props.busData);
-		return allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`);
+		thisBus = allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`);
 	};
 
 	const findScheduleAdherence = (adherence) => {
@@ -30,9 +32,10 @@ const BusDetails = (props) => {
 		}
 	}
 
-	let thisBus = [];
 
-	if (props.busData) thisBus = findThisBus();
+	if (props.busData) findThisBus();
+
+	console.log(thisBus)
 
 	return (  
 		<div className="container-fluid">
