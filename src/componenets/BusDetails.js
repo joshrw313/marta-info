@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useEffect } from "react";
 
 const BusDetails = (props) => {
-	const { bus } = useParams();
+	const { route, bus } = useParams();
 
 	useEffect(() => {
 		const timer = setTimeout(
