@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import RailStation from './componenets/railStationContainer';
 import BusRoute from './componenets/BusRouteContainer';
 import { getRail, getBusAll} from './actions';
+import BusDetails from './componenets/BusDetailsContainer';
 
 store.dispatch(getRail());
 store.dispatch(getBusAll());
@@ -56,6 +57,10 @@ function App() {
       <Route exact path="/bus/:route">
         <Navbar />
         <BusRoute/>
+      </Route>
+      <Route exact path="/bus/:route/:bus">
+        <Navbar />
+        <BusDetails/>
       </Route>
       <Route component={NotFound} /> 
       </Switch>

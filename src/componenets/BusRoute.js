@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 const BusRoute = (props) => {
 	const { route } = useParams();
@@ -37,10 +38,11 @@ const BusRoute = (props) => {
 				<h1 style={{color: "white", backgroundColor: "#57504d"}}>Route {route} </h1>
 				  { thisRouteBusses.map(bus => {
 					const thisBus = props.busData[bus];
-					
+					const thisBusDetails = `/bus/${route}/${thisBus.VEHICLE}`;	
+
 					return (
 						<div key={bus} className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-						<div><h3>{thisBus.DIRECTION}</h3> <h3>{thisBus.TIMEPOINT}</h3> <h3>{findScheduleAdherence(thisBus.ADHERENCE)}</h3></div>
+						<div><h3><Link to={thisBusDetails}>{thisBus.VEHICLE}</Link></h3><h3>{thisBus.DIRECTION}</h3> <h3>{thisBus.TIMEPOINT}</h3> <h3>{findScheduleAdherence(thisBus.ADHERENCE)}</h3></div>
 						</div>
 						
 					)
