@@ -37,12 +37,10 @@ const BusDetails = (props) => {
 
 	if (props.busData) findThisBus();
 
-	console.log(thisBus)
-
 	return (  
 		<div className="container-fluid">
 			<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-			<div><h3>{thisBus[0].DIRECTION}</h3> <h3>{thisBus[0].TIMEPOINT}</h3> <h3>{findScheduleAdherence(thisBus[0].ADHERENCE)}</h3></div>
+			<div><h3>{props.busData[thisBus[0]].DIRECTION}</h3> <h3>{props.busData[thisBus[0]].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[thisBus[0]].ADHERENCE)}</h3></div>
 			</div>
 		</div>
 	);
