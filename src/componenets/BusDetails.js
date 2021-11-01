@@ -4,6 +4,8 @@ import { useEffect } from "react";
 const BusDetails = (props) => {
 	const { route, bus } = useParams();
 
+	console.log(bus);
+
 	useEffect(() => {
 		const timer = setTimeout(
 			() => {
