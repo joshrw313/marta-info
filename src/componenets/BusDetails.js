@@ -21,7 +21,7 @@ const BusDetails = (props) => {
 
 	const findThisBus = () => {
 		const allBusses = Object.keys(props.busData);
-		thisBus = allBusses.filter(Bus => props.busData[Bus].VEHICLE === bus);
+		thisBus = allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`);
 	};
 
 	const findScheduleAdherence = (adherence) => {
