@@ -2,7 +2,10 @@ import { useParams } from "react-router";
 import { useEffect } from "react";
 
 const BusDetails = (props) => {
-	const { route, bus } = useParams();
+	const { bus } = useParams();
+	console.log(bus);
+	console.log(props.busData);
+
 
 	useEffect(() => {
 		const timer = setTimeout(
@@ -19,7 +22,6 @@ const BusDetails = (props) => {
 
 	const findThisBus = () => {
 		const allBusses = Object.keys(props.busData);
-		console.log(props.busData[0].VEHICLE);
 		return allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`)
 	};
 
