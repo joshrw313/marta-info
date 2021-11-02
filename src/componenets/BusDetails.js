@@ -35,6 +35,7 @@ const BusDetails = (props) => {
 
 	if (props.busData) {
 		thisBus = findThisBus();
+		console.log(thisBus);
 	}
 
 
