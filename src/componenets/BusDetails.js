@@ -41,11 +41,13 @@ const BusDetails = (props) => {
 
 		return (
 			thisBus.map(Bus => { 
-			<div key={Bus} className="container-fluid">
-				<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-				<div><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3></div>
-				</div>
-			</div>
+				return (
+					<div key={Bus} className="container-fluid">
+						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
+							<div><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3></div>
+						</div>
+					</div>
+				)
 			})
 	);
 }
