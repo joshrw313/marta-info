@@ -19,7 +19,8 @@ const BusDetails = (props) => {
 
 	const findThisBus = () => {
 		const allBusses = Object.keys(props.busData);
-		thisBus = allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`);
+		console.log(props.busData[0].VEHICLE);
+		return allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`)
 	};
 
 	const findScheduleAdherence = (adherence) => {
@@ -34,10 +35,9 @@ const BusDetails = (props) => {
 
 
 	if (props.busData) {
-		findThisBus();
+		thisBus = findThisBus();
 	}
 
-	console.log(thisBus[0]);		
 
 		return (  
 			<div className="container-fluid">
