@@ -3,9 +3,6 @@ import { useEffect } from "react";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
-	console.log(bus);
-	console.log(props.busData);
-
 
 	useEffect(() => {
 		const timer = setTimeout(
@@ -41,14 +38,14 @@ const BusDetails = (props) => {
 	}
 
 
-		return (  
-			<div className="container-fluid">
+		return (
+			thisBus.map(Bus => { 
+			<div key={Bus} className="container-fluid">
 				<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-				<div><h3>{props.busData[thisBus[0]].DIRECTION}</h3> <h3>{props.busData[thisBus[0]].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[thisBus[0]].ADHERENCE)}</h3></div>
+				<div><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3></div>
 				</div>
 			</div>
-	
-		
+			})
 	);
 }
  
