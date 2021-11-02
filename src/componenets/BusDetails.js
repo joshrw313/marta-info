@@ -4,8 +4,6 @@ import { useEffect } from "react";
 const BusDetails = (props) => {
 	const { route, bus } = useParams();
 
-	console.log(bus);
-
 	useEffect(() => {
 		const timer = setTimeout(
 			() => {
@@ -39,7 +37,7 @@ const BusDetails = (props) => {
 		findThisBus();
 	}
 
-	console.log(props.busData[thisBus[0]]);
+	console.log(thisBus[0]);		
 
 		return (  
 			<div className="container-fluid">
