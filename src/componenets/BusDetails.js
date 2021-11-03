@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import GoogleMapBus from "./GoogleMapBus";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
@@ -38,14 +39,15 @@ const BusDetails = (props) => {
 		console.log(thisBus);
 	}
 
-
 		return (
-			thisBus.map(Bus => { 
+			thisBus.map(Bus => {
+				const position =  {lat: props.busData[Bus].LATITUDE, lng: props.busData[Bus].LONGITUDE} 
 				return (
 					<div key={Bus} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-							<div><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3></div>
+							<div><h3>props.busData[Bus].VEHICLE</h3><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3></div>
 						</div>
+						<GoogleMapBus position={position} center={position} />
 					</div>
 				)
 			})
