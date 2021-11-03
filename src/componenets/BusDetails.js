@@ -42,7 +42,7 @@ const BusDetails = (props) => {
 		return (
 			thisBus.map(Bus => {
 				let position = null 
-				position = {lat: parseInt(props.busData[Bus].LATITUDE), lng: parseInt(props.busData[Bus].LONGITUDE)}; 
+				position = {lat: Number(props.busData[Bus].LATITUDE), lng: Number(props.busData[Bus].LONGITUDE)}; 
 				console.log(position);
 				return (
 					<div key={Bus} className="container-fluid">
