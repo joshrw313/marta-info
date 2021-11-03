@@ -1,5 +1,5 @@
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-const GoogleMapBus = (position, center) => {
+const GoogleMapBus = (props) => {
 
 	const containerStyle = {
 		width: '400px',
@@ -8,8 +8,8 @@ const GoogleMapBus = (position, center) => {
 
 	return (  
 		<LoadScript googleMapsApiKey="AIzaSyBAtGYZEH7X_Ezlolefmx45V40l5eermV0">
-			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={2}>
-			<Marker position={position} />	
+			<GoogleMap mapContainerStyle={containerStyle} center={props.center} zoom={2}>
+			<Marker position={props.position} />	
 			</GoogleMap>
 		</LoadScript>
 	);
