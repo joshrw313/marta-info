@@ -8,7 +8,7 @@ const GoogleMapBus = (props) => {
 
 	return (  
 		<LoadScript googleMapsApiKey="AIzaSyBAtGYZEH7X_Ezlolefmx45V40l5eermV0">
-			<GoogleMap mapContainerStyle={containerStyle} center={props.center} zoom={2}>
+			<GoogleMap mapContainerStyle={containerStyle} center={props.center} zoom={10}>
 			<Marker position={props.position} />	
 			</GoogleMap>
 		</LoadScript>
