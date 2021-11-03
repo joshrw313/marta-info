@@ -41,7 +41,7 @@ const BusDetails = (props) => {
 
 		return (
 			thisBus.map(Bus => {
-				const position =  {lat: props.busData[Bus].LATITUDE, lng: props.busData[Bus].LONGITUDE} 
+				const position =  {lat: parseInt(props.busData[Bus].LATITUDE), lng: parseInt(props.busData[Bus].LONGITUDE)} 
 				return (
 					<div key={Bus} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
