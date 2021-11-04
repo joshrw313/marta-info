@@ -19,6 +19,7 @@ import RailStation from './componenets/railStationContainer';
 import BusRoute from './componenets/BusRouteContainer';
 import { getRail, getBusAll} from './actions';
 import BusDetails from './componenets/BusDetailsContainer';
+import BusPage from './componenets/BusPage';
 
 store.dispatch(getRail());
 store.dispatch(getBusAll());
@@ -60,7 +61,7 @@ function App() {
       </Route>
       <Route exact path="/bus/:route/:bus">
         <Navbar />
-        <BusDetails/>
+        <BusPage/>
       </Route>
       <Route component={NotFound} /> 
       </Switch>

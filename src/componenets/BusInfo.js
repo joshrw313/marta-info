@@ -1,8 +1,7 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-import GoogleMapBus from "./GoogleMapBus";
+import { useEffect, } from "react";
 
-const BusDetails = (props) => {
+const BusInfo = (props) => {
 	const { bus } = useParams();
 
 	useEffect(() => {
@@ -46,20 +45,11 @@ const BusDetails = (props) => {
 				console.log(position);
 				return (
 					<div key={Bus} className="container-fluid">
-						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-							<div className="row">
-								<div className="col">
-									<h3>{props.busData[Bus].VEHICLE}</h3><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3>
-								</div>
-								<div className="col">
-									{ position && <GoogleMapBus position={position} center={position} /> }
-								</div>
-							</div>
-						</div>
+						<h3>{props.busData[Bus].VEHICLE}</h3><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3>
 					</div>
 				)
 			})
 	);
 }
  
-export default BusDetails;
+export default BusInfo;
