@@ -10,7 +10,7 @@ const BusDetails = (props) => {
 			() => {
 				props.getBusAll();
 			},
-			60000	
+			10000	
 		);
 		return () => clearTimeout(timer);
 	});
