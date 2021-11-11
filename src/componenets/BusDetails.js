@@ -20,11 +20,11 @@ const BusDetails = (props) => {
 	console.log(thisBus);
 	};
 
-	useEffect(() => {
+	useEffect( () => {
 		const timer = setTimeout(
-			() => {
+			async () => {
 				store.dispatch(getBusAll());
-				setTimeout(() => {
+				await setTimeout(() => {
 				state = store.getState();
 				}, 5000);
 				busData = state.busAll.data;

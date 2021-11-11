@@ -45,9 +45,9 @@ const RailStation = (props) => {
 
 	useEffect(() => {
 		const timer = setTimeout(
-			() => {
+			async () => {
 				store.dispatch(getRail());
-				setTimeout(() => state = store.getState(), 5000);
+				await setTimeout(() => state = store.getState(), 5000);
 				railData = state.rail.data;
 				if (railData) findThisStationTrains();
 			},
