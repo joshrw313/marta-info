@@ -22,16 +22,16 @@ const BusDetails = (props) => {
 
 	useEffect( () => {
 		const timer = setTimeout(
-			async () => {
+			() => {
 				store.dispatch(getBusAll());
-				const wait = setTimeout(() => {
 				state = store.getState();
-				}, 5000);
-				await clearTimeout(wait);
 				busData = state.busAll.data;
-				if (busData){
-				thisBus = findThisBus();
-				console.log(thisBus);
+				while (!busData) {
+					busData = state.busAll.data;
+				}
+				if (busData) {
+					thisBus = findThisBus();
+					console.log(thisBus);
 				}
 			},
 			30000	
