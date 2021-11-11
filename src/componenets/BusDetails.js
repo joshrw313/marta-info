@@ -1,16 +1,21 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import GoogleMapBus from "./GoogleMapBus";
+import store from "../store";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
+	let state = store.getState();
+	let busData = state.busAll.data;
 
 	useEffect(() => {
 		const timer = setTimeout(
 			() => {
 				props.getBusAll();
+				state = store.getState();
+				busData = state.busAll.data;
 			},
-			10000	
+			30000	
 		);
 		return () => clearTimeout(timer);
 	});
@@ -19,8 +24,8 @@ const BusDetails = (props) => {
 	let thisBus = [];
 
 	const findThisBus = () => {
-		const allBusses = Object.keys(props.busData);
-		return allBusses.filter(Bus => props.busData[Bus].VEHICLE === `${bus}`)
+		const allBusses = Object.keys(busData);
+		return allBusses.filter(Bus => busData[Bus].VEHICLE === `${bus}`)
 	};
 
 	const findScheduleAdherence = (adherence) => {
@@ -34,7 +39,7 @@ const BusDetails = (props) => {
 	}
 
 
-	if (props.busData) {
+	if (busData) {
 		thisBus = findThisBus();
 		console.log(thisBus);
 	}
@@ -42,14 +47,14 @@ const BusDetails = (props) => {
 		return (
 			thisBus.map(Bus => {
 				let position = null 
-				position = {lat: Number(props.busData[Bus].LATITUDE), lng: Number(props.busData[Bus].LONGITUDE)}; 
+				position = {lat: Number(busData[Bus].LATITUDE), lng: Number(busData[Bus].LONGITUDE)}; 
 				console.log(position);
 				return (
 					<div key={Bus} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
 							<div className="row">
 								<div className="col">
-									<h3>{props.busData[Bus].VEHICLE}</h3><h3>{props.busData[Bus].DIRECTION}</h3> <h3>{props.busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(props.busData[Bus].ADHERENCE)}</h3>
+									<h3>{busData[Bus].VEHICLE}</h3><h3>{busData[Bus].DIRECTION}</h3> <h3>{busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(busData[Bus].ADHERENCE)}</h3>
 								</div>
 								<div className="col">
 									{ position && <GoogleMapBus position={position} center={position} /> }
