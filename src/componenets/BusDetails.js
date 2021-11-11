@@ -50,6 +50,7 @@ const BusDetails = (props) => {
 				position = {lat: Number(busData[Bus].LATITUDE), lng: Number(busData[Bus].LONGITUDE)}; 
 				console.log(position);
 				return (
+					/*
 					<div key={1} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
 							<div className="row">
@@ -61,6 +62,10 @@ const BusDetails = (props) => {
 								</div>
 							</div>
 						</div>
+					</div>
+					*/
+					<div key={Bus} className="container-sm">
+						testing testin 1.. 2..
 					</div>
 				)
 			})
