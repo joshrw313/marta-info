@@ -2,23 +2,24 @@ import { useParams } from "react-router";
 import { useEffect, } from "react";
 import GoogleMapBus from "./GoogleMapBus";
 import { store } from "../store";
+import { getBusAll } from "../actions";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
 	let state = store.getState();
 	let busData = state.busAll.data;
 
-	/*useEffect(() => {
+	useEffect(() => {
 		const timer = setTimeout(
 			() => {
-				props.getBusAll();
+				store.dispatch(getBusAll());
 				state = store.getState();
 				busData = state.busAll.data;
 			},
 			30000	
 		);
 		return () => clearTimeout(timer);
-	});*/
+	});
 
 	
 	let thisBus = [];
