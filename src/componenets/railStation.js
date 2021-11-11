@@ -54,8 +54,16 @@ const RailStation = (props) => {
 		);
 		return () => clearTimeout(timer);
 	});
+	useEffect(() => {
+		const timer = setTimeout(
+			() => {
+				if (railData) findThisStationTrains();
+			},
+			5000	
+		);
+		return () => clearTimeout(timer);
+	});
 
-	if (railData) findThisStationTrains();
 
 	return (  
 		<div className="container-fluid">

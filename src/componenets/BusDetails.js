@@ -17,6 +17,7 @@ const BusDetails = (props) => {
 
 	if (busData) {
 	thisBus = findThisBus();
+	console.log(thisBus);
 	};
 
 	useEffect(() => {
@@ -25,7 +26,12 @@ const BusDetails = (props) => {
 				store.dispatch(getBusAll());
 				state = store.getState();
 				busData = state.busAll.data;
-				setTimeout(() => thisBus = findThisBus(), 5000);
+				setTimeout(() => {
+					if (busData){
+					thisBus = findThisBus();
+					console.log(thisBus);
+					}
+				}, 5000);
 			},
 			30000	
 		);
