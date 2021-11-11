@@ -8,6 +8,14 @@ const BusDetails = (props) => {
 	const { bus } = useParams();
 	let state = store.getState();
 	let busData = state.busAll.data;
+	let thisBus = [];
+
+	const findThisBus = () => {
+		const allBusses = Object.keys(busData);
+		return allBusses.filter(Bus => busData[Bus].VEHICLE === `${bus}`)
+	};
+
+	thisBus = findThisBus();
 
 	useEffect(() => {
 		const timer = setTimeout(
@@ -22,14 +30,6 @@ const BusDetails = (props) => {
 		return () => clearTimeout(timer);
 	});
 
-	
-	let thisBus = [];
-
-	const findThisBus = () => {
-		const allBusses = Object.keys(busData);
-		return allBusses.filter(Bus => busData[Bus].VEHICLE === `${bus}`)
-	};
-
 	const findScheduleAdherence = (adherence) => {
 		if (parseInt(adherence) === 0) {
 			return "On Schedule";
@@ -40,11 +40,6 @@ const BusDetails = (props) => {
 		}
 	}
 
-
-	if (busData) {
-		thisBus = findThisBus();
-		console.log(thisBus);
-	}
 
 		return (
 			thisBus.map(Bus => {
