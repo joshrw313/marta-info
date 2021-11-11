@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useEffect, } from "react";
 import GoogleMapBus from "./GoogleMapBus";
-import store from "../store";
+import { store } from "../store";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
@@ -50,7 +50,6 @@ const BusDetails = (props) => {
 				position = {lat: Number(busData[Bus].LATITUDE), lng: Number(busData[Bus].LONGITUDE)}; 
 				console.log(position);
 				return (
-					/*
 					<div key={1} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
 							<div className="row">
@@ -63,8 +62,6 @@ const BusDetails = (props) => {
 							</div>
 						</div>
 					</div>
-					*/
-					<div className="container-fluid">lorem ipsum blah blah</div>
 				)
 			})
 	);
