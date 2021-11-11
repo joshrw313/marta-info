@@ -24,9 +24,10 @@ const BusDetails = (props) => {
 		const timer = setTimeout(
 			async () => {
 				store.dispatch(getBusAll());
-				await setTimeout(() => {
+				const wait = setTimeout(() => {
 				state = store.getState();
 				}, 5000);
+				await clearTimeout(wait);
 				busData = state.busAll.data;
 				if (busData){
 				thisBus = findThisBus();
