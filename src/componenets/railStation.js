@@ -47,22 +47,17 @@ const RailStation = (props) => {
 		const timer = setTimeout(
 			() => {
 				store.dispatch(getRail());
-				state = store.getState();
+				setTimeout(() => state = store.getState(), 5000);
 				railData = state.rail.data;
+				if (railData) findThisStationTrains();
 			},
 			60000	
 		);
 		return () => clearTimeout(timer);
 	});
-	useEffect(() => {
-		const timer = setTimeout(
-			() => {
-				if (railData) findThisStationTrains();
-			},
-			5000	
-		);
-		return () => clearTimeout(timer);
-	});
+
+
+	if (railData) findThisStationTrains();
 
 
 	return (  

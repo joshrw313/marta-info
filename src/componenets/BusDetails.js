@@ -24,14 +24,14 @@ const BusDetails = (props) => {
 		const timer = setTimeout(
 			() => {
 				store.dispatch(getBusAll());
-				state = store.getState();
-				busData = state.busAll.data;
 				setTimeout(() => {
-					if (busData){
-					thisBus = findThisBus();
-					console.log(thisBus);
-					}
+				state = store.getState();
 				}, 5000);
+				busData = state.busAll.data;
+				if (busData){
+				thisBus = findThisBus();
+				console.log(thisBus);
+				}
 			},
 			30000	
 		);
