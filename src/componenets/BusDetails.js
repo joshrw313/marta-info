@@ -64,7 +64,7 @@ const BusDetails = (props) => {
 						</div>
 					</div>
 					*/
-					<div key={Bus} className="container-sm">
+					<div key={1} className="container-sm">
 						testing testin 1.. 2..
 					</div>
 				)
