@@ -50,7 +50,7 @@ const BusDetails = (props) => {
 				position = {lat: Number(busData[Bus].LATITUDE), lng: Number(busData[Bus].LONGITUDE)}; 
 				console.log(position);
 				return (
-					<div key={Bus} className="container-fluid">
+					<div key={1} className="container-fluid">
 						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
 							<div className="row">
 								<div className="col">
