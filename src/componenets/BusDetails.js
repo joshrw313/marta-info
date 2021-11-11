@@ -15,7 +15,9 @@ const BusDetails = (props) => {
 		return allBusses.filter(Bus => busData[Bus].VEHICLE === `${bus}`)
 	};
 
+	if (busData) {
 	thisBus = findThisBus();
+	};
 
 	useEffect(() => {
 		const timer = setTimeout(
@@ -23,7 +25,7 @@ const BusDetails = (props) => {
 				store.dispatch(getBusAll());
 				state = store.getState();
 				busData = state.busAll.data;
-				thisBus = findThisBus();
+				setTimeout(() => thisBus = findThisBus(), 5000);
 			},
 			30000	
 		);
