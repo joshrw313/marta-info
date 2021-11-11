@@ -18,7 +18,7 @@ import { Provider } from 'react-redux';
 import RailStation from './componenets/railStationContainer';
 import BusRoute from './componenets/BusRouteContainer';
 import { getRail, getBusAll} from './actions';
-import BusDetails from './componenets/BusDetailsContainer';
+import BusDetails from './componenets/BusDetails';
 
 store.dispatch(getRail());
 store.dispatch(getBusAll());
