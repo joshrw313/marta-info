@@ -15,7 +15,7 @@ import Rail from './componenets/Rail';
 import NotFound from './componenets/NotFound';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import RailStation from './componenets/railStationContainer';
+import RailStation from './componenets/railStation';
 import BusRoute from './componenets/BusRouteContainer';
 import { getRail, getBusAll} from './actions';
 import BusDetails from './componenets/BusDetails';

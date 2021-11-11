@@ -15,6 +15,7 @@ const BusDetails = (props) => {
 				store.dispatch(getBusAll());
 				state = store.getState();
 				busData = state.busAll.data;
+				thisBus = findThisBus();
 			},
 			30000	
 		);
