@@ -68,6 +68,17 @@ app.get('/api/bus/all', async (req,res) => {
 
 });
 
+app.get('/api/bus/all/:vehicle', async (req,res) => {
+	const vehicle = req.params.vehicle;
+	const options = {
+		hostname: 'developer.itsmarta.com',
+		path: '/BRDRestService/BRDRestService.svc/GetAllBus',
+	}
+
+	fetchData(options,res,vehicle);
+
+});
+
 app.get('/api/bus/:route', async (req,res) => {
 	const route = req.params.route
 	const options = {
