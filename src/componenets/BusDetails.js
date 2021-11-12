@@ -1,43 +1,10 @@
 import { useParams } from "react-router";
-import { useEffect, } from "react";
 import GoogleMapBus from "./GoogleMapBus";
-import { store } from "../store";
-import { getBusAll } from "../actions";
+import { Fetch } from "react-request";
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
-	let state = store.getState();
-	let busData = state.busAll.data;
-	let thisBus = [];
-
-	const findThisBus = () => {
-		const allBusses = Object.keys(busData);
-		return allBusses.filter(Bus => busData[Bus].VEHICLE === `${bus}`)
-	};
-
-	if (busData) {
-	thisBus = findThisBus();
-	console.log(thisBus);
-	};
-
-	useEffect( () => {
-		const timer = setTimeout(
-			() => {
-				store.dispatch(getBusAll());
-				state = store.getState();
-				busData = state.busAll.data;
-				while (!busData) {
-					busData = state.busAll.data;
-				}
-				if (busData) {
-					thisBus = findThisBus();
-					console.log(thisBus);
-				}
-			},
-			30000	
-		);
-		return () => clearTimeout(timer);
-	});
+	const url = `api/bus/all/${bus}`;
 
 	const findScheduleAdherence = (adherence) => {
 		if (parseInt(adherence) === 0) {
@@ -49,27 +16,39 @@ const BusDetails = (props) => {
 		}
 	}
 
-
 		return (
-			thisBus.map(Bus => {
-				let position = null 
-				position = {lat: Number(busData[Bus].LATITUDE), lng: Number(busData[Bus].LONGITUDE)}; 
-				console.log(position);
-				return (
-					<div key={1} className="container-fluid">
-						<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
-							<div className="row">
-								<div className="col">
-									<h3>{busData[Bus].VEHICLE}</h3><h3>{busData[Bus].DIRECTION}</h3> <h3>{busData[Bus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(busData[Bus].ADHERENCE)}</h3>
-								</div>
-								<div className="col">
-									{ position && <GoogleMapBus position={position} center={position} /> }
+			<Fetch url={url}>
+				{({ fetching, failed, data }) => {
+					if (fetching) {
+						return <div className="container-fluid">Loading Data...</div>
+					}
+
+					if (failed) {
+						return <div className="container-fluid">request failed</div>
+					}
+
+					if (data) {
+						let position = null 
+						position = {lat: Number(data.LATITUDE), lng: Number(data.LONGITUDE)}; 
+						console.log(position);
+						return (
+							<div className="container-fluid">
+								<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
+									<div className="row">
+										<div className="col">
+											<h3>{data.VEHICLE}</h3><h3>{data.DIRECTION}</h3> <h3>{data.TIMEPOINT}</h3> <h3>{findScheduleAdherence(data.ADHERENCE)}</h3>
+										</div>
+										<div className="col">
+											{ position && <GoogleMapBus position={position} center={position} /> }
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				)
-			})
+							)
+						}
+					}
+				}
+			</Fetch>
 	);
 }
  
