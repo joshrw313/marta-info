@@ -1,15 +1,10 @@
 import { useParams } from "react-router";
-import { useEffect } from "react";
-import { store } from "../store";
-import { getRail } from "../actions";
+import axios from 'axios';
+import { useQuery } from "react-query";
 
 const RailStation = (props) => {
 	const { station } = useParams();
 	let Station = station.toUpperCase();
-
-	let state = store.getState();
-	let railData = state.rail.data;
-
 
 	Station = Station.replace('  ', ' ');
 	Station = Station.replace('.','');
@@ -34,38 +29,33 @@ const RailStation = (props) => {
 			 Station = Station.toUpperCase()
 	}
 
-
-	let thisStationTrains = [];
-
-	const findThisStationTrains = () => {
-		const allTrains = Object.keys(railData);
-		//allTrains.forEach(train => console.log(props.railData[train].STATION));
-		thisStationTrains =  allTrains.filter(train => railData[train].STATION === `${Station} STATION`);
+	const findThisStationTrains = (data) => {
+		const allTrains = Object.keys(data);
+		const thisStationTrains =  allTrains.filter(train => data[train].STATION === `${Station} STATION`);
+		return thisStationTrains;
 	};
 
-	useEffect(() => {
-		const timer = setTimeout(
-			async () => {
-				store.dispatch(getRail());
-				await setTimeout(() => state = store.getState(), 5000);
-				railData = state.rail.data;
-				if (railData) findThisStationTrains();
-			},
-			60000	
-		);
-		return () => clearTimeout(timer);
-	});
+	const fetchRailDetails = async (station) => {
+		const response = await axios.get(`/api/train/all`);
+		console.log(response.data);
+		return response.data
+	}
 
+	const queryOptions = { refetchInterval: 10000 }
 
-	if (railData) findThisStationTrains();
+	const {data, isLoading, error} = useQuery(station, fetchRailDetails, queryOptions);
 
+	if (isLoading) return <span>...Loading</span>
+	if (error) return <span>error fetching data</span>
+
+	const thisStationTrains = findThisStationTrains(data);
 
 	return (  
 		<div className="container-fluid">
 			<div className="container-sm" style={ {textAlign: "center", marginTop: "5rem"} }>
 				<h1 style={{backgroundColor: "#57504d", color: "white"}}>{station}</h1>
 				  { thisStationTrains.map(train => {
-					const thisTrain = railData[train];
+					const thisTrain = data[train];
 					return (
 						<div key= {train} className="container-sm" style={{backgroundColor: "#181716", color:"white", marginTop: "2rem"}}>
 						<div className="row"><h3><span style={ {color: thisTrain.LINE.toLowerCase()} }>{thisTrain.DIRECTION}</span> {thisTrain.DESTINATION} {thisTrain.WAITING_TIME}</h3></div>

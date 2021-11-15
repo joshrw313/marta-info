@@ -4,6 +4,10 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import {
+  QueryClient,
+  QueryClientProvider
+} from 'react-query';
 import Helmet from 'react-helmet';
 import Signin from './componenets/Signin';
 import Signup from './componenets/Signup';
@@ -16,12 +20,14 @@ import NotFound from './componenets/NotFound';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import RailStation from './componenets/railStation';
-import BusRoute from './componenets/BusRouteContainer';
+import BusRoute from './componenets/BusRoute';
 import { getRail, getBusAll} from './actions';
 import BusDetails from './componenets/BusDetails';
 
 store.dispatch(getRail());
 store.dispatch(getBusAll());
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -42,6 +48,7 @@ function App() {
         <Navbar />
         <Home />
       </Route>
+      <QueryClientProvider client={queryClient}>
       <Route exact path="/bus">
         <Navbar />
         <Bus />
@@ -62,6 +69,7 @@ function App() {
         <Navbar />
         <BusDetails/>
       </Route>
+      </QueryClientProvider>
       <Route component={NotFound} /> 
       </Switch>
     </Router>

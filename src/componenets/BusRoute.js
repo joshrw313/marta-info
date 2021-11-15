@@ -1,24 +1,25 @@
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
+import {
+	useQuery
+} from "react-query";
 
 const BusRoute = (props) => {
 	const { route } = useParams();
-	let thisRouteBusses = [];
-	useEffect(() => {
-		const timer = setTimeout(
-			() => {
-				props.getBusAll();
-			},
-			60000	
-		);
-		return () => clearTimeout(timer);
-	});
 
-	const findThisRouteBusses = () => {
-		const allBusses = Object.keys(props.busData);
-		thisRouteBusses =  allBusses.filter(bus => props.busData[bus].ROUTE === `${route}`);
-	};
+
+	const fetchBusDetails = async (route) => {
+		const response = await axios.get(`/api/bus/all`);
+		console.log(response.data);
+		return response.data
+	}
+
+	const queryOptions = { refetchInterval: 10000 }
+
+	const {data, isLoading, error} = useQuery(route, fetchBusDetails, queryOptions);
 
 	const findScheduleAdherence = (adherence) => {
 		if (parseInt(adherence) === 0) {
@@ -30,14 +31,23 @@ const BusRoute = (props) => {
 		}
 	}
 
-	if (props.busData) findThisRouteBusses();
+	const findThisRouteBusses = (data) => {
+		const allBusses = Object.keys(data);
+		const thisRouteBusses =  allBusses.filter(bus => data[bus].ROUTE === `${route}`);
+		return thisRouteBusses;
+	};
+
+	if (isLoading) return <span>...Loading</span>
+	if (error) return <span>error fetching data</span>
+
+	const thisRouteBusses = findThisRouteBusses(data);
 
 	return (  
 		<div className="container-fluid" style={{textAlign: "center", marginTop: "5rem"}}>
 			<div className="container-sm">
 				<h1 style={{color: "white", backgroundColor: "#57504d"}}>Route {route} </h1>
 				  { thisRouteBusses.map(bus => {
-					const thisBus = props.busData[bus];
+					const thisBus = data[bus];
 					const thisBusDetails = `/bus/${route}/${thisBus.VEHICLE}`;	
 
 					return (
