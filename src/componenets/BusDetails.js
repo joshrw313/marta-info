@@ -9,6 +9,8 @@ import {
 const BusDetails = (props) => {
 	const { bus } = useParams();
 
+	let positionsArray = []; 
+
 	const fetchBusDetails = async (bus) => {
 		const response = await axios.get(`/api/bus/all/`);
 		return response.data
@@ -28,6 +30,8 @@ const BusDetails = (props) => {
 		}
 	}
 
+	let position = null
+	
 	if (isLoading) return <span>...Loading</span>
 	if (error) return <span>error fetching data</span>
 	
@@ -35,8 +39,6 @@ const BusDetails = (props) => {
 	const thisBus = allBusses.filter(Bus => data[Bus].VEHICLE === bus);
 	console.log(thisBus);
 	
-	let position = null
-	let positionsArray = []; 
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
 	if (positionsArray.length || positionsArray[positionsArray.length - 1] !== position) positionsArray.push(position);
