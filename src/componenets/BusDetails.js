@@ -41,7 +41,7 @@ const BusDetails = (props) => {
 	
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
-	if (!positionsArray.length || positionsArray[positionsArray.length - 1].lat !== position.lat || positionsArray[positionsArray.length].lng !== position.lng) positionsArray.push(position);
+	if (!positionsArray.length || positionsArray[positionsArray.length - 1].lat !== position.lat || positionsArray[positionsArray.length -1].lng !== position.lng) positionsArray.push(position);
 	console.log(positionsArray);
 
 	return (
