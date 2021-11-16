@@ -6,10 +6,10 @@ import {
 	useQuery
 } from "react-query";
 
+const positionsArray = [];
+
 const BusDetails = (props) => {
 	const { bus } = useParams();
-
-	let positionsArray = []; 
 
 	const fetchBusDetails = async (bus) => {
 		const response = await axios.get(`/api/bus/all/`);
