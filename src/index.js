@@ -5,15 +5,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {store} from './store';
-import { getBusAll, getBusByRoute, getRail } from './actions';
-
-window.store = store;
-window.getBusAll = getBusAll;
-window.getBusByRoute = getBusByRoute;
-window.getRail = getRail;
-
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

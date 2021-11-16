@@ -41,7 +41,7 @@ const RailStation = (props) => {
 		return response.data
 	}
 
-	const queryOptions = { refetchInterval: 10000 }
+	const queryOptions = { refetchInterval: 60000 }
 
 	const {data, isLoading, error} = useQuery(station, fetchRailDetails, queryOptions);
 

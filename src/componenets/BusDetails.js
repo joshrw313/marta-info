@@ -11,7 +11,6 @@ const BusDetails = (props) => {
 
 	const fetchBusDetails = async (bus) => {
 		const response = await axios.get(`/api/bus/all/`);
-		console.log(response.data);
 		return response.data
 	}
 
@@ -36,9 +35,13 @@ const BusDetails = (props) => {
 	const thisBus = allBusses.filter(Bus => data[Bus].VEHICLE === bus);
 	console.log(thisBus);
 	
-	let position = null 
+	let position = null
+	let positionsArray = []; 
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
+	if (positionsArray[positionsArray.length()] !== position) positionsArray.push(position);
+	console.log(positionsArray);
+
 	return (
 	<div className="container-fluid">
 		<div className="container-sm" style={ {marginTop: "2rem", color: "white", backgroundColor: "#181716"} } >
@@ -47,7 +50,7 @@ const BusDetails = (props) => {
 					<h3>{data[thisBus].VEHICLE}</h3><h3>{data[thisBus].DIRECTION}</h3> <h3>{data[thisBus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(data[thisBus].ADHERENCE)}</h3>
 				</div>
 				<div className="col">
-					{ position && <GoogleMapBus position={position} center={position} /> }
+					{ positionsArray && <GoogleMapBus positionsArray={positionsArray} /> }
 				</div>
 			</div>
 		</div>
