@@ -9,8 +9,6 @@ import {
 const BusDetails = (props) => {
 	const { bus } = useParams();
 
-	const positionsArray = props.positionsArray
-
 	const fetchBusDetails = async (bus) => {
 		const response = await axios.get(`/api/bus/all/`);
 		return response.data
@@ -41,8 +39,8 @@ const BusDetails = (props) => {
 	
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
-	if (!positionsArray.length || positionsArray[positionsArray.length - 1].lat !== position.lat || positionsArray[positionsArray.length -1].lng !== position.lng) positionsArray.push(position);
-	console.log(positionsArray);
+	if (!props.positionsArray.length || props.positionsArray[props.positionsArray.length - 1].lat !== position.lat || props.positionsArray[props.positionsArray.length -1].lng !== position.lng) props.positionsArray.push(position);
+	console.log(props.positionsArray);
 
 	return (
 	<div className="container-fluid">
@@ -52,7 +50,7 @@ const BusDetails = (props) => {
 					<h3>{data[thisBus].VEHICLE}</h3><h3>{data[thisBus].DIRECTION}</h3> <h3>{data[thisBus].TIMEPOINT}</h3> <h3>{findScheduleAdherence(data[thisBus].ADHERENCE)}</h3>
 				</div>
 				<div className="col">
-					{ positionsArray && <GoogleMapBus positionsArray={positionsArray} /> }
+					{ props.positionsArray && <GoogleMapBus positionsArray={props.positionsArray} /> }
 				</div>
 			</div>
 		</div>
