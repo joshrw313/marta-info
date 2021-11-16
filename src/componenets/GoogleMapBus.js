@@ -12,7 +12,7 @@ const GoogleMapBus = (props) => {
 		<LoadScript googleMapsApiKey="AIzaSyBAtGYZEH7X_Ezlolefmx45V40l5eermV0">
 			<GoogleMap mapContainerStyle={containerStyle} center={positionsArray[positionsArray.length - 1]} zoom={15}>
 				{ positionsArray.map(position => {
-					<Marker key={positionsArray.indexOf(position)} position={position} />	
+					return <Marker key={positionsArray.indexOf(position)} position={position} />	
 				}) }
 			</GoogleMap>
 		</LoadScript>
