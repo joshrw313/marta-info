@@ -60,7 +60,7 @@ function App() {
             </Route>
             <Route exact path="/bus/:route/:bus">
               <Navbar />
-              <BusDetails/>
+              <BusDetails positionsArray={[]} />
             </Route>
             <Route component={NotFound} /> 
           </Switch>

@@ -6,10 +6,10 @@ import {
 	useQuery
 } from "react-query";
 
-let positionsArray = [];
-
 const BusDetails = (props) => {
 	const { bus } = useParams();
+
+	const positionsArray = props.positionsArray
 
 	const fetchBusDetails = async (bus) => {
 		const response = await axios.get(`/api/bus/all/`);
@@ -41,7 +41,7 @@ const BusDetails = (props) => {
 	
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
-	if (!positionsArray.length || positionsArray[positionsArray.length - 1] !== position) positionsArray.push(position);
+	if (!positionsArray.length || positionsArray[positionsArray.length - 1].lat !== position.lat || positionsArray[positionsArray.length].lng !== position.lng) positionsArray.push(position);
 	console.log(positionsArray);
 
 	return (
