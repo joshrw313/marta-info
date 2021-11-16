@@ -6,7 +6,7 @@ import {
 	useQuery
 } from "react-query";
 
-const positionsArray = [];
+let positionsArray = [];
 
 const BusDetails = (props) => {
 	const { bus } = useParams();
@@ -41,7 +41,7 @@ const BusDetails = (props) => {
 	
 	position = {lat: Number(data[thisBus].LATITUDE), lng: Number(data[thisBus].LONGITUDE)}; 
 	console.log(position);
-	if (positionsArray.length || positionsArray[positionsArray.length - 1] !== position) positionsArray.push(position);
+	if (!positionsArray.length || positionsArray[positionsArray.length - 1] !== position) positionsArray.push(position);
 	console.log(positionsArray);
 
 	return (
